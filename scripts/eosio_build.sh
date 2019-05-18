@@ -35,7 +35,7 @@ CMAKE_BUILD_TYPE=Release
 export DISK_MIN=20
 DOXYGEN=false
 ENABLE_COVERAGE_TESTING=false
-CORE_SYMBOL_NAME="SYS"
+CORE_SYMBOL_NAME="MVL"
 START_MAKE=true
 
 TIME_BEGIN=$( date -u +%s )
@@ -165,8 +165,7 @@ fi
 
 if [ ! -d "${REPO_ROOT}/.git" ]; then
    printf "\\nThis build script only works with sources cloned from git\\n"
-   printf "Please clone a new eos directory with 'git clone https://github.com/EOSIO/eos --recursive'\\n"
-   printf "See the wiki for instructions: https://github.com/EOSIO/eos/wiki\\n"
+   printf "Please clone a new mvl directory with 'git clone https://github.com/mvlchaindev/mvl --recursive'\\n"
    exit 1
 fi
 
@@ -292,16 +291,20 @@ cd $REPO_ROOT
 
 TIME_END=$(( $(date -u +%s) - $TIME_BEGIN ))
 
-printf "${bldred}\n\n _______  _______  _______ _________ _______\n"
-printf '(  ____ \(  ___  )(  ____ \\\\__   __/(  ___  )\n'
-printf "| (    \/| (   ) || (    \/   ) (   | (   ) |\n"
-printf "| (__    | |   | || (_____    | |   | |   | |\n"
-printf "|  __)   | |   | |(_____  )   | |   | |   | |\n"
-printf "| (      | |   | |      ) |   | |   | |   | |\n"
-printf "| (____/\| (___) |/\____) |___) (___| (___) |\n"
-printf "(_______/(_______)\_______)\_______/(_______)\n\n${txtrst}"
+printf "${bldred}\n\n"
+printf " __       __  __     __  __         ______   __                  __           \n"
+printf "/  \     /  |/  |   /  |/  |       /      \ /  |                /  |          \n"
+printf "$$  \   /$$ |$$ |   $$ |$$ |      /$$$$$$  |$$ |____    ______  $$/  _______  \n"
+printf "$$$  \ /$$$ |$$ |   $$ |$$ |      $$ |  $$/ $$      \  /      \ /  |/       \ \n"
+printf "$$$$  /$$$$ |$$  \ /$$/ $$ |      $$ |      $$$$$$$  | $$$$$$  |$$ |$$$$$$$  |\n"
+printf "$$ $$ $$/$$ | $$  /$$/  $$ |      $$ |   __ $$ |  $$ | /    $$ |$$ |$$ |  $$ |\n"
+printf "$$ |$$$/ $$ |  $$ $$/   $$ |_____ $$ \__/  |$$ |  $$ |/$$$$$$$ |$$ |$$ |  $$ |\n"
+printf "$$ | $/  $$ |   $$$/    $$       |$$    $$/ $$ |  $$ |$$    $$ |$$ |$$ |  $$ |\n"
+printf "$$/      $$/     $/     $$$$$$$$/  $$$$$$/  $$/   $$/  $$$$$$$/ $$/ $$/   $$/ \n"
+printf "                                                                              \n"
+printf "                                                                              \n${txtrst}"
 
-printf "\\nEOSIO has been successfully built. %02d:%02d:%02d\\n" $(($TIME_END/3600)) $(($TIME_END%3600/60)) $(($TIME_END%60))
+printf "\\nMVLChain has been successfully built. %02d:%02d:%02d\\n" $(($TIME_END/3600)) $(($TIME_END%3600/60)) $(($TIME_END%60))
 printf "==============================================================================================\\n${bldred}"
 printf "(Optional) Testing Instructions:\\n"
 print_instructions
@@ -309,9 +312,6 @@ printf "${BIN_LOCATION}/mongod --dbpath ${MONGODB_DATA_LOCATION} -f ${MONGODB_CO
 printf "cd ./build && PATH=\$PATH:$HOME/opt/mongodb/bin make test\\n" # PATH is set as currently 'mongo' binary is required for the mongodb test
 printf "${txtrst}==============================================================================================\\n"
 printf "For more information:\\n"
-printf "EOSIO website: https://eos.io\\n"
-printf "EOSIO Telegram channel @ https://t.me/EOSProject\\n"
-printf "EOSIO resources: https://eos.io/resources/\\n"
-printf "EOSIO Stack Exchange: https://eosio.stackexchange.com\\n"
-printf "EOSIO wiki: https://github.com/EOSIO/eos/wiki\\n\\n\\n"
-
+printf "MVL website: https://mvlchain.io\\n"
+printf "MVL Telegram channel for global users @ https://t.me/mvlchain_enn\\n"
+printf "MVL Telegram channel for Korean users @ https://t.me/mvlchain_kr\\n"
