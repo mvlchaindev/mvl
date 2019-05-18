@@ -1,8 +1,8 @@
-set(VENDOR "block.one")
-set(PROJECT_NAME "eosio")
-set(DESC "Software for the EOS.IO network")
-set(URL "https://github.com/eosio/eos")
-set(EMAIL "support@block.one")
+set(VENDOR "Mass Vehicle Ledger")
+set(PROJECT_NAME "mvl")
+set(DESC "Software for MVL network")
+set(URL "https://github.com/mvlchaindev/mvl")
+set(EMAIL "support@mvlchain.io")
 
 configure_file(${CMAKE_SOURCE_DIR}/scripts/generate_package.sh.in ${CMAKE_BINARY_DIR}/packages/generate_package.sh @ONLY)
 configure_file(${CMAKE_SOURCE_DIR}/scripts/generate_bottle.sh ${CMAKE_BINARY_DIR}/packages/generate_bottle.sh COPYONLY)
