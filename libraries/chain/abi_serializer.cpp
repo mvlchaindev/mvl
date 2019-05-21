@@ -405,7 +405,7 @@ namespace eosio { namespace chain {
       auto s_itr = structs.end();
 
       auto btype = built_in_types.find(fundamental_type(rtype));
-      if( btype != built_in_types.end() ) {
+      if ( btype != built_in_types.end() ) {
          btype->second.second(var, ds, is_array(rtype), is_optional(rtype));
       } else if ( is_array(rtype) ) {
          ctx.hint_array_type_if_in_array();
@@ -421,7 +421,13 @@ namespace eosio { namespace chain {
            _variant_to_binary(fundamental_type(rtype), var, ds, ctx);
            ++i;
          }
-      } else if( (v_itr = variants.find(rtype)) != variants.end() ) {
+      } else if ( is_optional(rtype) ) {
+        char flag = !var.is_null();
+        fc::raw::pack(ds, flag);
+        if (flag) {
+          _variant_to_binary(fundamental_type(rtype), var, ds, ctx);
+        }
+      } else if ( (v_itr = variants.find(rtype)) != variants.end() ) {
          ctx.hint_variant_type_if_in_array( v_itr );
          auto& v = v_itr->second;
          EOS_ASSERT( var.is_array() && var.size() == 2, pack_exception,
