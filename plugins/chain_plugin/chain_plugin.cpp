@@ -1886,7 +1886,7 @@ chain::symbol read_only::extract_core_symbol()const {
 
    // The following code makes assumptions about the contract deployed on eosio account (i.e. the system contract) and how it stores its data.
    const auto& d = db.db();
-   const auto* t_id = d.find<chain::table_id_object, chain::by_code_scope_table>(boost::make_tuple( change::config::system_account_name, change::config::system_account_name, N(rammarket) ));
+   const auto* t_id = d.find<chain::table_id_object, chain::by_code_scope_table>(boost::make_tuple( config::system_account_name, config::system_account_name, N(rammarket) ));
    if( t_id != nullptr ) {
       const auto &idx = d.get_index<key_value_index, by_scope_primary>();
       auto it = idx.find(boost::make_tuple( t_id->id, eosio::chain::string_to_symbol_c(4,"RAMCORE") ));
