@@ -659,8 +659,8 @@ public:
      static auto function() {
         return [](const input_type& v) {
             chain::key256_t k;
-            memset(k.data(), 0, sizeof(k));
-            memcpy(k.data(), v._hash, sizeof(v._hash));
+            auto ptr = static_cast<const char*>(v._hash);
+            endian_convert(k, ptr, ptr + sizeof(v._hash));
             return k;
         };
      }
@@ -673,8 +673,10 @@ public:
      static auto function() {
         return [](const input_type v) {
             chain::key256_t k;
-            k[0] = ((uint128_t *)&v)[0]; //0-127
-            k[1] = ((uint128_t *)&v)[1]; //127-256
+            // k[0] means upper 128 bit part
+            // uint256_t stores as little endian
+            k[0] = ((uint128_t *)&v)[1]; // 128 - 255
+            k[1] = ((uint128_t *)&v)[0]; // 0 - 127
             return k;
         };
      }
