@@ -601,6 +601,35 @@ public:
  constexpr const char dec[]       = "dec";
  constexpr const char hex[]       = "hex";
 
+ static void endian_convert(chain::key256_t &key, const char* begin, const char* end) {
+   auto itr = key.begin();
+   uint128_t tmp = 0;
+   auto ptr = begin;
+   auto itr = key.begin();
+   size_t count = 0;
+   size_t size = sizeof(uint128_t) / sizeof(char);
+   size_t shift_bit_size = 8 * sizeof(char);
+
+   for (auto ptr = begin; ptr != end && itr != key.end(); ++ptr) {
+     // stuffing uint128_t type (from big endian)
+     tmp |= *ptr;
+     tmp <<= shift_bit_size;
+     ++count;
+     if (count == size) {
+       *itr++ = tmp;
+       // reset
+       tmp = 0;
+       count = 0;
+     }
+   }
+
+   if (itr != key.end()) {
+     if (count < size) {
+       tmp <<= (size - count)*8;
+     }
+     *itr = tmp;
+   }
+ }
 
  template<const char*key_type , const char *encoding=chain_apis::dec>
  struct keytype_converter ;
@@ -614,8 +643,8 @@ public:
             chain::key256_t k;
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wstrict-aliasing"
-            k[0] = ((uint128_t *)&v._hash)[0]; //0-127
-            k[1] = ((uint128_t *)&v._hash)[1]; //127-256
+            auto ptr = static_cast<const char*>(v._hash);
+            endian_convert(k, ptr, ptr + sizeof(v._hash));
 #pragma GCC diagnostic pop
             return k;
         };
