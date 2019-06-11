@@ -61,7 +61,7 @@ struct chain_config {
                  << "Max Transaction Delay: " << c.max_transaction_delay << ", "
                  << "Max Inline Action Size: " << c.max_inline_action_size << ", "
                  << "Max Inline Action Depth: " << c.max_inline_action_depth << ", "
-                 << "Max Authority Depth: " << c.max_authority_depth << ", ";
+                 << "Max Authority Depth: " << c.max_authority_depth << ", "
 
                  << "Net Weight Modifier: " << c.net_weight_modifier << ", "
                  << "CPU Weight Modifier: " << c.cpu_weight_modifier << "\n";
