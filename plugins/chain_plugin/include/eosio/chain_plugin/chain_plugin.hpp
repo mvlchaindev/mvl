@@ -605,7 +605,6 @@ public:
    auto itr = key.begin();
    uint128_t tmp = 0;
    auto ptr = begin;
-   auto itr = key.begin();
    size_t count = 0;
    size_t size = sizeof(uint128_t) / sizeof(char);
    size_t shift_bit_size = 8 * sizeof(char);
@@ -643,7 +642,7 @@ public:
             chain::key256_t k;
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wstrict-aliasing"
-            auto ptr = static_cast<const char*>(v._hash);
+            auto ptr = reinterpret_cast<const char*>(v._hash);
             endian_convert(k, ptr, ptr + sizeof(v._hash));
 #pragma GCC diagnostic pop
             return k;
@@ -659,7 +658,7 @@ public:
      static auto function() {
         return [](const input_type& v) {
             chain::key256_t k;
-            auto ptr = static_cast<const char*>(v._hash);
+            auto ptr = reinterpret_cast<const char*>(v._hash);
             endian_convert(k, ptr, ptr + sizeof(v._hash));
             return k;
         };
