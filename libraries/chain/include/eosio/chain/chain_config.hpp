@@ -106,8 +106,8 @@ struct chain_config {
                            rhs.max_inline_action_size,
                            rhs.max_inline_action_depth,
                            rhs.max_authority_depth,
-                           lhs.cpu_weight_modifier,
-                           lhs.net_weight_modifier
+                           rhs.cpu_weight_modifier,
+                           rhs.net_weight_modifier
                         );
    };
 

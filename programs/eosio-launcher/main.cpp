@@ -1179,6 +1179,7 @@ launcher_def::write_logging_config_file(tn_node_def &node) {
 void
 launcher_def::init_genesis () {
    const bfs::path genesis_path = genesis.is_complete() ? genesis : bfs::current_path() / genesis;
+   cout << "genesis path=" << genesis_path << endl;
    if (!bfs::exists(genesis_path)) {
       cout << "generating default genesis file " << genesis_path << endl;
       eosio::chain::genesis_state default_genesis;
